@@ -1,7 +1,7 @@
 package lista03_exercicio03;
 
 public class Aviao {
-	int altitudeKM, velocidadeKMh;
+	public int altitudeKM, velocidadeKMh;
 	
 	public Aviao(int velocidadeKM, int altitudeKMh) {
 		this.altitudeKM = altitudeKMh;
