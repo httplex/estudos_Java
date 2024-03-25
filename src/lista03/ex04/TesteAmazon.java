@@ -3,7 +3,7 @@ package lista03.ex04;
 public class TesteAmazon {
 
 	public static void main(String[] args) {
-		Produto produto1 = new Produto("Água mineral", 10.99, 10);
+		Produto produto1 = new Produto("Arroz", 10.99, 10);
 		
 		System.out.println(produto1);
 		
