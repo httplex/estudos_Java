@@ -7,7 +7,7 @@ public class Designer extends Funcionario{
 	
 	@Override
 	public double calcularBonificacao() {
-		double bonificacao = salario * 0.1;
+		double bonificacao = salario * 0.12;
 		return bonificacao;
 	}
 }

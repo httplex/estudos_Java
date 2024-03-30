@@ -36,12 +36,17 @@ public abstract class Funcionario {
 	}
 
 	public abstract double calcularBonificacao();
+	public double calcularSalarioTotal() {
+        return salario + calcularBonificacao();
+    }
 	
 	public String toString() {
-		return  "********** Dados do Funcionário **********" + 
+		return  "\n********** Dados do Funcionário **********" + 
 				"\nNome: " + nome +
 				"\nCPF: " + cpf + 
-				"\nSalário: " + salario;
+				"\nSalário: " + salario + 
+				"\nBonificação: " + String.format("R$ %.2f", calcularBonificacao()) + 
+				"\nSalário Total: " + String.format("R$ %.2f", calcularSalarioTotal());
 	}
 	
 
