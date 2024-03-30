@@ -7,20 +7,21 @@ public class FolhaBonificacoes {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        Funcionario[] funcionarios = new Funcionario[10];
-        int indice = 0;
+        Funcionario[] funcionarios = new Funcionario[10]; // Criar array de funcionários
+        int indice = 0; // Define a primeira posição do item no array
 
         System.out.println("~~~~~~ Folha de bonificações XYZ ~~~~~~");
 
         int opcao;
         do {
-            System.out.println("\nPara interação no sistema escolha uma opção disponível: ");
-            System.out.println("> Digite 1: Para cadastrar um novo Funcionário.");
-            System.out.println("> Digite 2: Para listar os funcionários já cadastrados.");
-            System.out.println("> Digite 0: Para sair do programa.");
+            System.out.println("\nPara interação no sistema escolha uma das opções disponíveis: ");
+            System.out.println("          1: Cadastrar novo Funcionário.");
+            System.out.println("          2: Listar funcionários já cadastrados.");
+            System.out.println("          0: Sair do programa.");
+            System.out.println("-------------------------------------------------------------");
 
             opcao = sc.nextInt();
-            sc.nextLine();
+            sc.nextLine(); // Limpar buffer
 
             switch (opcao) {
                 case 1:
@@ -35,8 +36,8 @@ public class FolhaBonificacoes {
                     System.out.print("Cargo: ");
                     String cargo = sc.nextLine();
 
-                    Funcionario funcionario = null;
-                    if (cargo.equalsIgnoreCase("gerente")) {
+                    Funcionario funcionario = null; // começa vazio pra dizer que não tem nada dentro desse array
+                    if (cargo.equalsIgnoreCase("gerente") || cargo.equalsIgnoreCase("Gerente")) {
                         funcionario = new Gerente(nome, cpf, salario);
                     } else if (cargo.equalsIgnoreCase("designer")) {
                         funcionario = new Designer(nome, cpf, salario);
@@ -56,7 +57,7 @@ public class FolhaBonificacoes {
                     break;
 
                 case 0:
-                    System.out.println("\nSaindo do programa...");
+                    System.out.println("\nXoxo, Gossip Girl...");
                     break;
 
                 default:
