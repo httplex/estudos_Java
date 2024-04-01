@@ -12,7 +12,7 @@ public class FolhaBonificacoes {
 
         System.out.println("~~~~~~ Folha de bonificações XYZ ~~~~~~");
 
-        int opcao;
+        int opcao; //inicia a variável a opção
         do {
             System.out.println("\nPara interação no sistema escolha uma das opções disponíveis: ");
             System.out.println("          1: Cadastrar novo Funcionário.");
