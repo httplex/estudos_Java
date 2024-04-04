@@ -35,9 +35,19 @@ public class TechConvert {
 					conversor = new Conversor(valorEmGramas);
 					System.out.println("O valor em Libras é de: \n" + conversor.converterEmLibras() + "\n");
 					break;
+					
+				case 3:
+					System.out.println("Informe o valor em gramas: ");
+					valorEmGramas = sc.nextDouble();
+					conversor = new Conversor(valorEmGramas);
+					System.out.println("O valor em Onças é de: \n" + conversor.converterEmOncas() + "\n");
+					break;
+					
+				default:
+                    System.out.println("Opção inválida. Por favor, digite um número válido.\n");
 					}
 				}catch(InputMismatchException e) {
-					 System.out.println("Entrada inválida. Por favor, digite um número inteiro.");
+					 System.out.println("Entrada inválida. Por favor, digite um número inteiro.\n");
 					 sc.nextLine();
 					}
 				
