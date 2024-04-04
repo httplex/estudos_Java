@@ -9,8 +9,7 @@ public class TechConvert {
 			Scanner sc = new Scanner(System.in);
 			System.out.println("~~~~ Conversor de Unidades: ~~~~");
 
-			int opcao;
-			
+			int opcao = -1;
 			
 			do {
 				try {
@@ -39,7 +38,7 @@ public class TechConvert {
 					}
 				}catch(InputMismatchException e) {
 					 System.out.println("Entrada inválida. Por favor, digite um número inteiro.");
-		                opcao = 0; // Define a opção como 0 para evitar loops infinitos
+					 sc.nextLine();
 					}
 				
 			} while(opcao != 0);
