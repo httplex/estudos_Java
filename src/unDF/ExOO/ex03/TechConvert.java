@@ -1,4 +1,4 @@
-package ExOO.ex03;
+package unDF.ExOO.ex03;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

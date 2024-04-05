@@ -1,4 +1,4 @@
-package ExOO.ex01;
+package unDF.ExOO.ex01;
 
 public class Gerente extends Funcionario{
 	public Gerente(String nome, String cpf, double salario) {

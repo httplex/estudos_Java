@@ -1,4 +1,4 @@
-package ExOO.ex01;
+package unDF.ExOO.ex01;
 
 public abstract class Funcionario {
 	public String nome;

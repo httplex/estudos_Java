@@ -1,4 +1,4 @@
-package ExOO.ex01;
+package unDF.ExOO.ex01;
 
 public class Designer extends Funcionario{
 	public Designer(String nome, String cpf, double salario) {
