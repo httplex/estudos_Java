@@ -1,31 +1,23 @@
 package cursoUdemy.exe05;
 
 public class Conta {
-	int numeroConta;
-	String nomeTitular;
-	double depositoInicial;
+	private int numeroConta;
+	private String nomeTitular;
+	private double saldo;
 	
-	public Conta() {
-
+	public Conta(int numeroConta, String nomeTitular) {
+		this.numeroConta = numeroConta;
+		this.nomeTitular = nomeTitular;
 	}
 	
 	public Conta(int numeroConta, String nomeTitular, double depositoInicial) {
 		this.numeroConta = numeroConta;
 		this.nomeTitular = nomeTitular;
-		this.depositoInicial = depositoInicial;
+		depositar(depositoInicial); //melhor pra regra de negócio
 	}
 	
-	public Conta(String nomeTitular, double depositoInicial) {
-		this.nomeTitular = nomeTitular;
-		this.depositoInicial = depositoInicial;
-	}
-
 	public int getNumeroConta() {
 		return numeroConta;
-	}
-
-	public void setNumeroConta(int numeroConta) {
-		this.numeroConta = numeroConta;
 	}
 
 	public String getNomeTitular() {
@@ -36,16 +28,22 @@ public class Conta {
 		this.nomeTitular = nomeTitular;
 	}
 
-	public double getDepositoInicial() {
-		return depositoInicial;
+	public double getSaldo() {
+		return saldo;
 	}
-
-	public void setDepositoInicial(double depositoInicial) {
-		this.depositoInicial = depositoInicial;
+	
+	public void depositar(double quantia) {
+		saldo += quantia;
+	}
+	
+	public void sacar(double quantia) {
+		saldo -= quantia + 5.0;
 	}
 	
 	public String toString() {
-		return "";
+		return  "Conta " + numeroConta +
+				", Titular da conta: " + nomeTitular + 
+				", Saldo: $ " + String.format("%.2f", saldo);
 	}
 	
 	
