@@ -4,13 +4,22 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
@@ -20,7 +29,7 @@ public class GerenciamentoVeiculo extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	 private CadastroVeiculo cadastroVeiculo; 
+	private CadastroVeiculo cadastroVeiculo; 
 
 	/**
 	 * Launch the application.
@@ -43,7 +52,7 @@ public class GerenciamentoVeiculo extends JFrame {
 	 */
 	public GerenciamentoVeiculo() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(200, 200, 560, 350);
+		setBounds(200, 200, 600, 350);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.text);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -62,17 +71,17 @@ public class GerenciamentoVeiculo extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		JButton btnCadastro = new JButton("Cadastrar veículo");
-		btnCadastro.setBounds(55, 126, 123, 31);
+		btnCadastro.setBounds(55, 126, 135, 31);
 		contentPane.add(btnCadastro);
 		
 		JButton btnListar = new JButton("Listar Veículos");
-		btnListar.setBounds(55, 184, 123, 31);
+		btnListar.setBounds(55, 184, 135, 31);
 		contentPane.add(btnListar);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBackground(SystemColor.activeCaptionText);
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\desuf\\Desktop\\7820319a2cf056d034ba063ccdbaa6e8.jpg"));
-		lblNewLabel.setBounds(103, 0, 498, 311);
+		lblNewLabel.setBounds(142, 0, 498, 311);
 		contentPane.add(lblNewLabel);
 		
 		btnCadastro.addActionListener(new ActionListener() {
@@ -82,5 +91,59 @@ public class GerenciamentoVeiculo extends JFrame {
 				setVisible(false);
 			}
 		});
+		
+		btnListar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                listarVeiculos();
+            }
+        });
+    }
+
+	private void listarVeiculos() {
+	    DefaultTableModel model = new DefaultTableModel();
+	    model.addColumn("Marca");
+	    model.addColumn("Modelo");
+	    model.addColumn("Ano");
+	    model.addColumn("Tipo");
+	    model.addColumn("Combustível");
+
+	    try (BufferedReader reader = new BufferedReader(new FileReader("dados_veiculo.txt"))) {
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	            String[] parts = line.split(", ");
+	            if (parts.length == 5) {
+	                model.addRow(parts);
+	            }
+	        }
+	    } catch (IOException ex) {
+	        ex.printStackTrace();
+	    }
+
+	    JTable table = new JTable(model);
+	    JScrollPane scrollPane = new JScrollPane(table);
+
+	    JButton btnAlterar = new JButton("Alterar");
+	    btnAlterar.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            int selectedRow = table.getSelectedRow();
+	            int selectedColumn = table.getSelectedColumn();
+	            if (selectedRow != -1 && selectedColumn != -1) {
+	                String columnName = table.getColumnName(selectedColumn);
+	                String currentValue = (String) table.getValueAt(selectedRow, selectedColumn);
+	                String newValue = JOptionPane.showInputDialog(null, "Novo valor para " + columnName + ":", currentValue);
+	                if (newValue != null && !newValue.isEmpty()) {
+	                    table.setValueAt(newValue, selectedRow, selectedColumn);
+	                }
+	            } else {
+	                JOptionPane.showMessageDialog(null, "Selecione um campo para alterar.");
+	            }
+	        }
+	    });
+
+	    JPanel panel = new JPanel(new BorderLayout());
+	    panel.add(scrollPane, BorderLayout.CENTER);
+	    panel.add(btnAlterar, BorderLayout.SOUTH);
+
+	    JOptionPane.showMessageDialog(null, panel, "Lista de Veículos", JOptionPane.PLAIN_MESSAGE);
 	}
 }
