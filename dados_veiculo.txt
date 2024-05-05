@@ -1,4 +1,1 @@
-NSEI, Chevrolet, carro, 1998, 78L
-modelo, marca, carro, 1998, 78L
-marca, modelo, 8989, 989, 8989
-Ford, Car, Carro, 2003, 40L
+ana paully, asasa, asas, asasas, asasas

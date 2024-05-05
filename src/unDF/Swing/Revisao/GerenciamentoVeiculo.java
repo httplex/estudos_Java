@@ -15,7 +15,9 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.JLabel;
@@ -30,6 +32,8 @@ public class GerenciamentoVeiculo extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private CadastroVeiculo cadastroVeiculo; 
+	private JTable table;
+	private DefaultTableModel model;
 
 	/**
 	 * Launch the application.
@@ -133,6 +137,7 @@ public class GerenciamentoVeiculo extends JFrame {
 	                String newValue = JOptionPane.showInputDialog(null, "Novo valor para " + columnName + ":", currentValue);
 	                if (newValue != null && !newValue.isEmpty()) {
 	                    table.setValueAt(newValue, selectedRow, selectedColumn);
+	                    salvarAlteracoes(table, model); // Chamada para salvar as alterações no arquivo
 	                }
 	            } else {
 	                JOptionPane.showMessageDialog(null, "Selecione um campo para alterar.");
@@ -146,4 +151,25 @@ public class GerenciamentoVeiculo extends JFrame {
 
 	    JOptionPane.showMessageDialog(null, panel, "Lista de Veículos", JOptionPane.PLAIN_MESSAGE);
 	}
+	
+	private void salvarAlteracoes(JTable table, DefaultTableModel model) {
+	    try (BufferedWriter writer = new BufferedWriter(new FileWriter("dados_veiculo.txt"))) {
+	        for (int i = 0; i < model.getRowCount(); i++) {
+	            for (int j = 0; j < model.getColumnCount(); j++) {
+	                writer.write(model.getValueAt(i, j).toString());
+	                if (j < model.getColumnCount() - 1) {
+	                    writer.write(", ");
+	                }
+	            }
+	            writer.newLine();
+	        }
+	        writer.flush();
+	        JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
+	    } catch (IOException ex) {
+	        ex.printStackTrace();
+	        JOptionPane.showMessageDialog(null, "Erro ao salvar as alterações.");
+	    }
+	}
+
+
 }
