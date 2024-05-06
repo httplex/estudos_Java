@@ -1,34 +1,26 @@
 package unDF.Swing.Teste;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
+import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
-import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class GerenciamentoVeiculo extends JFrame {
+public class GerenciarPessoa extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField marcaVeiculo;
-	private JTextField modeloVeiculo;
-	private Cadastro cadastro;
+	private JTextField nomePessoa;
+	private JTextField pessoaCPF;
+	Cadastro cadastro;
 
 	/**
 	 * Launch the application.
@@ -37,7 +29,7 @@ public class GerenciamentoVeiculo extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GerenciamentoVeiculo frame = new GerenciamentoVeiculo();
+					GerenciarPessoa frame = new GerenciarPessoa();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +41,7 @@ public class GerenciamentoVeiculo extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GerenciamentoVeiculo() {
+	public GerenciarPessoa() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -58,57 +50,58 @@ public class GerenciamentoVeiculo extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Cadastro de Veículo");
+		JLabel lblNewLabel = new JLabel("Cadastro de Pessoa");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel.setBounds(10, 11, 155, 14);
+		lblNewLabel.setBounds(10, 11, 146, 14);
 		contentPane.add(lblNewLabel);
 		
-		JLabel marca = new JLabel("Marca");
-		marca.setBounds(10, 48, 46, 14);
-		contentPane.add(marca);
+		JLabel nome = new JLabel("Nome: ");
+		nome.setFont(new Font("Tahoma", Font.BOLD, 15));
+		nome.setBounds(22, 48, 59, 14);
+		contentPane.add(nome);
 		
-		marcaVeiculo = new JTextField();
-		marcaVeiculo.setBounds(61, 45, 86, 20);
-		contentPane.add(marcaVeiculo);
-		marcaVeiculo.setColumns(10);
+		JLabel cpf = new JLabel("CPF: ");
+		cpf.setFont(new Font("Tahoma", Font.BOLD, 15));
+		cpf.setBounds(22, 91, 46, 14);
+		contentPane.add(cpf);
 		
-		JLabel modelo = new JLabel("Modelo");
-		modelo.setBounds(10, 73, 46, 14);
-		contentPane.add(modelo);
+		nomePessoa = new JTextField();
+		nomePessoa.setBounds(91, 47, 86, 20);
+		contentPane.add(nomePessoa);
+		nomePessoa.setColumns(10);
 		
-		modeloVeiculo = new JTextField();
-		modeloVeiculo.setBounds(61, 70, 86, 20);
-		contentPane.add(modeloVeiculo);
-		modeloVeiculo.setColumns(10);
+		pessoaCPF = new JTextField();
+		pessoaCPF.setBounds(91, 90, 86, 20);
+		contentPane.add(pessoaCPF);
+		pessoaCPF.setColumns(10);
 		
+		cadastro = new Cadastro();
 		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.setBounds(58, 187, 89, 23);
+		btnSalvar.setBounds(91, 188, 89, 23);
 		contentPane.add(btnSalvar);
 		
 		JButton btnListar = new JButton("Listar");
-		btnListar.setBounds(210, 187, 89, 23);
+		btnListar.setBounds(235, 188, 89, 23);
 		contentPane.add(btnListar);
 		
-		cadastro = new Cadastro();
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Cadastro cadastro = new Cadastro();
-				String modelo = modeloVeiculo.getText();
-				String marca = marcaVeiculo.getText();
+				String nome = nomePessoa.getText();
+				String cpf = pessoaCPF.getText();
 				
-				cadastro.SalvarEmArquivo("ana.txt", marca, modelo);
-				JOptionPane.showMessageDialog(null, "Dados salvos!");
+				cadastro.SalvarEmArquivo("pessoa.txt", nome, cpf);
+				JOptionPane.showMessageDialog(null, "Tudo OK");
 				
 			}
 		});
 		
 		btnListar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cadastro.listarDados();
+				cadastro.ListarDados();
+				
 			}
+			
 		});
-		
 	}
-	
-	
 }

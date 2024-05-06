@@ -5,7 +5,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,69 +15,47 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class Cadastro {
-	private List<GerenciamentoVeiculo>veiculo;
+	private List<GerenciarPessoa>pessoa;
 	
-	public Cadastro() {
-		this.veiculo = new ArrayList<>();
+	Cadastro(){
+		this.pessoa = new ArrayList<>();
 	}
 	
-	public void AdicionarVeiculo(GerenciamentoVeiculo veiculos) {
-		veiculo.add(veiculos);
+	public void AdicionarPessoa(GerenciarPessoa pessoas) {
+		pessoa.add(pessoas);
 	}
 	
-	public void SalvarEmArquivo(String nomeArquivo, String marca, String modelo) {
+	public void SalvarEmArquivo(String nomeArquivo, String nome, String cpf) {
 		try(BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo, true))){
-			writer.write(marca + ", " + modelo);
+			writer.write(nome + ", " + cpf);
 			writer.newLine();
-			System.out.println("Dados salvos em " + nomeArquivo + ".");
-		}catch(IOException e) {
+			System.out.println("Salvo em " + nomeArquivo + ".");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void listarDados() {
+	public void ListarDados() {
 		DefaultTableModel model = new DefaultTableModel();
-		model.addColumn("modelo");
-		model.addColumn("marca");
+		model.addColumn("Nome");
+		model.addColumn("CPF");
 		
-		try(BufferedReader reader = new BufferedReader(new FileReader("ana.txt"))){
+		try(BufferedReader reader = new BufferedReader(new FileReader("pessoa.txt"))){
 			String line;
 			while((line = reader.readLine()) != null) {
-				String [] parts = line.split(",");
+				String[] parts = line.split(", ");
 				if(parts.length == 2) {
 					model.addRow(parts);
 				}
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		JTable table = new JTable(model);
-	    JScrollPane scrollPane = new JScrollPane(table);
-	    
-	    JPanel panel = new JPanel(new BorderLayout());
-	    panel.add(scrollPane, BorderLayout.CENTER);
-
-	    JOptionPane.showMessageDialog(null, panel, "Lista de Veículos", JOptionPane.PLAIN_MESSAGE);
+		JScrollPane scrollPane = new JScrollPane(table);
+		JPanel panel = new JPanel(new BorderLayout());
+		panel.add(scrollPane, BorderLayout.CENTER);
+		JOptionPane.showMessageDialog(null, panel, "Lista de Dados", JOptionPane.PLAIN_MESSAGE);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
